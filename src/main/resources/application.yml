@@ -43,3 +43,7 @@ spring:
          # - Path=/competition/**
         #filters:
          # - RewritePath=/competition(?<segment>/?.*), /$\{segment}
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
