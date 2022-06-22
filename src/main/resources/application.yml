@@ -1,0 +1,45 @@
+spring:
+  cloud:
+  # Configuration de l'API Gateway
+    gateway:
+      discovery:
+        locator:
+          enabled: true #activation eureka locator
+          lowerCaseServiceId: true
+    # Configuration des routes de l'API Gateway
+    routes:
+      #Service 1
+      - id: gestion-badge
+        uri: lb://GESTIONBADGE/
+        predicates:
+          - Path=/badge/**
+        filters:
+          - RewritePath=/badge(?<segment>/?.*), /$\{segment}
+      #Service 2
+      - id: gestion-membre
+        uri: lb://GESTIONMEMBRE/
+        predicates:
+          - Path=/membres/**
+        filters:
+          - RewritePath=/membres(?<segment>/?.*), /$\{segment}
+      #Service 3
+      - id: gestion-cours
+        uri: lb://GESTIONCOURS/
+        predicates:
+          - Path=/cours/**
+        filters:
+          - RewritePath=/cours(?<segment>/?.*), /$\{segment}
+      #Service 4
+      - id: gestion-administrative
+        uri: lb://GESTIONADMINISTRATIVE/
+        predicates:
+          - Path=/admin/**
+        filters:
+          - RewritePath=/admin(?<segment>/?.*), /$\{segment}
+      #Service 5
+      #- id: gestionCompetition
+       # uri: lb://gestioncompetition/
+        #predicates:
+         # - Path=/competition/**
+        #filters:
+         # - RewritePath=/competition(?<segment>/?.*), /$\{segment}
